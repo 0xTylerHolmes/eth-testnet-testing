@@ -1,2 +1,2 @@
-# eth-testnet-testing
-Testing library for Ethereum testnets.
+# eth-testnet-tool
+Testing libraries for Ethereum testnets.
