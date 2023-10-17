@@ -1,5 +1,11 @@
 package eth_testnet_tool
 
+import (
+	"math/rand"
+	"reflect"
+	"time"
+)
+
 // ExecutionClientJSON the json representation of an execution layer client
 type ExecutionClientJSON struct {
 	Name        string `json:"name"`
@@ -60,4 +66,13 @@ func (t *TestnetClientsJSON) GetTestnetClients() *TestnetClients {
 		testnetClients.ExecutionClients[executionClientJSON.Name] = ExecutionClient{RPCEndpoint: executionClientJSON.RPCEndpoint}
 	}
 	return &testnetClients
+}
+
+func (t *TestnetClients) GetRandomConsensusClient() *ConsensusClient {
+	// non-efficient but straight forward
+	rand.Seed(time.Now().UnixNano())
+	keys := reflect.ValueOf(t.ConsensusClients).MapKeys()
+	randIdx := rand.Intn(len(keys))
+	randomClient := t.ConsensusClients[keys[randIdx].String()]
+	return &randomClient
 }
