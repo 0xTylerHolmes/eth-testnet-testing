@@ -1,4 +1,4 @@
-package pkg
+package eth_testnet_tool
 
 import (
 	"context"
