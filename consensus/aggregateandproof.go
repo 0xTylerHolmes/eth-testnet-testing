@@ -5,14 +5,14 @@ import (
 	fuzz "github.com/google/gofuzz"
 )
 
-func RandomSignedAggregateAndProof() *phase0.SignedAggregateAndProof {
+func RandomAggregateAndProof() *phase0.SignedAggregateAndProof {
 	var signedAggregateAndProof phase0.SignedAggregateAndProof
 	f := fuzz.New().NilChance(0)
 	for true {
 		f.Fuzz(&signedAggregateAndProof)
 		_, err := signedAggregateAndProof.MarshalSSZ()
 		if err == nil {
-			continue
+			break
 		}
 	}
 	return &signedAggregateAndProof

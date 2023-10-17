@@ -12,7 +12,7 @@ func RandomCapellaSignedBeaconBlock() *capella.SignedBeaconBlock {
 		f.Fuzz(&signedBeaconBlock)
 		_, err := signedBeaconBlock.MarshalSSZ()
 		if err == nil {
-			continue
+			break
 		}
 	}
 	return &signedBeaconBlock

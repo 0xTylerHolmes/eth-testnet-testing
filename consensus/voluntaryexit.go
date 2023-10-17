@@ -5,15 +5,15 @@ import (
 	fuzz "github.com/google/gofuzz"
 )
 
-func RandomAttestation() *phase0.Attestation {
-	var attestation phase0.Attestation
+func RandomVoluntaryExit() *phase0.VoluntaryExit {
+	var voluntaryExit phase0.VoluntaryExit
 	f := fuzz.New().NilChance(0)
 	for true {
-		f.Fuzz(&attestation)
-		_, err := attestation.MarshalSSZ()
+		f.Fuzz(&voluntaryExit)
+		_, err := voluntaryExit.MarshalSSZ()
 		if err == nil {
 			break
 		}
 	}
-	return &attestation
+	return &voluntaryExit
 }
