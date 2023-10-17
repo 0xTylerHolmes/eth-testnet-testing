@@ -1,10 +1,14 @@
-package pkg
+package eth_testnet_tool
 
 import (
 	"encoding/json"
 	"github.com/pkg/errors"
 	"os"
 )
+
+//func getValidAttestationData(committeeIndex uint64, client *ConsensusClient) {
+//	head := client.G
+//}
 
 func GetTestnetClientsFromConfig(filePath string) (*TestnetClientsJSON, error) {
 	data, err := os.ReadFile(filePath)
