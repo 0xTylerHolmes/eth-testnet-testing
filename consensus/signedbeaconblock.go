@@ -1,7 +1,9 @@
 package consensus
 
 import (
+	"fmt"
 	v1 "github.com/attestantio/go-eth2-client/api/v1"
+	"github.com/attestantio/go-eth2-client/spec"
 	"github.com/attestantio/go-eth2-client/spec/altair"
 	"github.com/attestantio/go-eth2-client/spec/bellatrix"
 	"github.com/attestantio/go-eth2-client/spec/capella"
@@ -17,27 +19,28 @@ type BeaconBlockHeaderResponseJSON struct {
 	Finalized           bool                  `json:"finalized"`
 }
 
-type Phase0BeaconBlockProposalJSON struct {
-	Data *phase0.BeaconBlock `json:"data"`
+type Phase0SignedBeaconBlockProposalJSON struct {
+	Data *phase0.SignedBeaconBlock `json:"data"`
 }
 
-type AltairBeaconBlockProposalJSON struct {
-	Data *altair.BeaconBlock `json:"data"`
+type AltairSignedBeaconBlockProposalJSON struct {
+	Data *altair.SignedBeaconBlock `json:"data"`
 }
 
-type BellatrixBeaconBlockProposalJSON struct {
-	Data *bellatrix.BeaconBlock `json:"data"`
+type BellatrixSignedBeaconBlockProposalJSON struct {
+	Data *bellatrix.SignedBeaconBlock `json:"data"`
 }
 
-type CapellaBeaconBlockProposalJSON struct {
-	Data *capella.BeaconBlock `json:"data"`
+type CapellaSignedBeaconBlockProposalJSON struct {
+	Data *capella.SignedBeaconBlock `json:"data"`
 }
 
-type DenebBeaconBlockProposalJSON struct {
-	Data *deneb.BeaconBlock `json:"data"`
+type DenebSignedBeaconBlockProposalJSON struct {
+	Data *deneb.SignedBeaconBlock `json:"data"`
 }
 
-func RandomPhase0SignedBeaconBlock() *phase0.SignedBeaconBlock {
+// TODO round trip ssz fails
+func RandomPhase0SignedBeaconBlock() *spec.VersionedSignedBeaconBlock {
 	var signedBeaconBlock phase0.SignedBeaconBlock
 	f := fuzz.New().NilChance(0)
 	for true {
@@ -47,9 +50,14 @@ func RandomPhase0SignedBeaconBlock() *phase0.SignedBeaconBlock {
 			break
 		}
 	}
-	return &signedBeaconBlock
+	return &spec.VersionedSignedBeaconBlock{
+		Version: spec.DataVersionPhase0,
+		Phase0:  &signedBeaconBlock,
+	}
 }
-func RandomAltairSingedBeaconBlock() *altair.SignedBeaconBlock {
+
+// TODO round trip ssz fails
+func RandomAltairSingedBeaconBlock() *spec.VersionedSignedBeaconBlock {
 	var signedBeaconBlock altair.SignedBeaconBlock
 	f := fuzz.New().NilChance(0)
 	for true {
@@ -59,10 +67,14 @@ func RandomAltairSingedBeaconBlock() *altair.SignedBeaconBlock {
 			break
 		}
 	}
-	return &signedBeaconBlock
+	return &spec.VersionedSignedBeaconBlock{
+		Version: spec.DataVersionAltair,
+		Altair:  &signedBeaconBlock,
+	}
 }
 
-func RandomBellatrixSignedBeaconBlock() *bellatrix.SignedBeaconBlock {
+// TODO round trip ssz fails
+func RandomBellatrixSignedBeaconBlock() *spec.VersionedSignedBeaconBlock {
 	var signedBeaconBlock bellatrix.SignedBeaconBlock
 	f := fuzz.New().NilChance(0)
 	for true {
@@ -72,10 +84,14 @@ func RandomBellatrixSignedBeaconBlock() *bellatrix.SignedBeaconBlock {
 			break
 		}
 	}
-	return &signedBeaconBlock
+	return &spec.VersionedSignedBeaconBlock{
+		Version:   spec.DataVersionBellatrix,
+		Bellatrix: &signedBeaconBlock,
+	}
 }
 
-func RandomCapellaSignedBeaconBlock() *capella.SignedBeaconBlock {
+// TODO round trip ssz fails
+func RandomCapellaSignedBeaconBlock() *spec.VersionedSignedBeaconBlock {
 	var signedBeaconBlock capella.SignedBeaconBlock
 	f := fuzz.New().NilChance(0)
 	for true {
@@ -85,10 +101,14 @@ func RandomCapellaSignedBeaconBlock() *capella.SignedBeaconBlock {
 			break
 		}
 	}
-	return &signedBeaconBlock
+	return &spec.VersionedSignedBeaconBlock{
+		Version: spec.DataVersionCapella,
+		Capella: &signedBeaconBlock,
+	}
 }
 
-func RandomDenebSignedBeaconBlock() *deneb.SignedBeaconBlock {
+// TODO round trip ssz fails
+func RandomDenebSignedBeaconBlock() *spec.VersionedSignedBeaconBlock {
 	var signedBeaconBlock deneb.SignedBeaconBlock
 	f := fuzz.New().NilChance(0)
 	for true {
@@ -96,7 +116,12 @@ func RandomDenebSignedBeaconBlock() *deneb.SignedBeaconBlock {
 		_, err := signedBeaconBlock.MarshalSSZ()
 		if err == nil {
 			break
+		} else {
+			fmt.Println("generated block wasn't serializable, retrying.")
 		}
 	}
-	return &signedBeaconBlock
+	return &spec.VersionedSignedBeaconBlock{
+		Version: spec.DataVersionDeneb,
+		Deneb:   &signedBeaconBlock,
+	}
 }

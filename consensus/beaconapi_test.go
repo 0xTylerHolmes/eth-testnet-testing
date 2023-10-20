@@ -3,6 +3,7 @@ package consensus
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/attestantio/go-eth2-client/spec"
 	"github.com/attestantio/go-eth2-client/spec/capella"
 	"github.com/attestantio/go-eth2-client/spec/phase0"
 	"github.com/stretchr/testify/require"
@@ -72,5 +73,14 @@ func TestPostSignedBLSToExecutionChange(t *testing.T) {
 	var signedBLSToExecutionChange capella.SignedBLSToExecutionChange
 	signedBLSToExecutionChange = *RandomSignedBLSToExecutionChange()
 	err := PostSignedBLSToExecutionChange(ENDPOINT, signedBLSToExecutionChange)
+	fmt.Println(err)
+}
+
+// TODO failing
+func TestPostSignedBeaconBlock(t *testing.T) {
+	var signedBeaconBlock spec.VersionedSignedBeaconBlock
+	signedBeaconBlock = *RandomDenebSignedBeaconBlock()
+	fmt.Printf("Generated random deneb signed beacon blocK: %s\n", signedBeaconBlock.String())
+	err := PostSignedBeaconBlock(ENDPOINT, signedBeaconBlock)
 	fmt.Println(err)
 }

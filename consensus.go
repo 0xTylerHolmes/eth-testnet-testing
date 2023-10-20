@@ -3,6 +3,7 @@ package eth_testnet_tool
 import (
 	"eth-testnet-tool/consensus"
 	v1 "github.com/attestantio/go-eth2-client/api/v1"
+	"github.com/attestantio/go-eth2-client/spec"
 	"github.com/attestantio/go-eth2-client/spec/capella"
 	"github.com/attestantio/go-eth2-client/spec/phase0"
 )
@@ -36,6 +37,10 @@ func (c *ConsensusClient) PostSignedVoluntaryExit(exit phase0.SignedVoluntaryExi
 
 func (c *ConsensusClient) PostSignedBLSToExecutionChange(change capella.SignedBLSToExecutionChange) error {
 	return consensus.PostSignedBLSToExecutionChange(c.APIEndpoint, change)
+}
+
+func (c *ConsensusClient) PostSignedBeaconBlock(block spec.VersionedSignedBeaconBlock) error {
+	return consensus.PostSignedBeaconBlock(c.APIEndpoint, block)
 }
 
 // Group Functions

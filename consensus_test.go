@@ -95,3 +95,16 @@ func TestPostSignedBLSToExecutionChangeToRandomClient(t *testing.T) {
 		fmt.Printf("client at: %s responded with error: %s", consensusClient.APIEndpoint, err.Error())
 	}
 }
+
+// TODO: fix this blocks currently are not working with submission
+//func TestPostSignedBeaconBlockToRandomClient(t *testing.T) {
+//	testnetClients, err := getTestnetClientsFromExampleConfig()
+//	require.NoError(t, err)
+//	consensusClient := testnetClients.GetRandomConsensusClient()
+//	randomBellarixSignedBeaconBlock := consensus.RandomBellatrixSignedBeaconBlock()
+//	fmt.Printf("generated random deneb signed beacon block: %s", randomBellarixSignedBeaconBlock.String())
+//	err = consensusClient.PostSignedBeaconBlock(*randomBellarixSignedBeaconBlock)
+//	if err != nil {
+//		fmt.Printf("client at: %s responded with error: %s", consensusClient.APIEndpoint, err.Error())
+//	}
+//}
