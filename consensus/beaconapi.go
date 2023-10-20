@@ -147,6 +147,22 @@ func GetCheckpoints(beaconEndpoint string, slot string) (*v1.Finality, error) {
 	return checkpointResponse.Data, nil
 }
 
+// GetNodePeers gets the peers from the node peers beacon api endpoint
+func GetNodePeers(beaconEndpoint string) (*NodePeers, error) {
+	var nodePeers NodePeers
+	resp, err := getRequest(beaconEndpoint, []byte(fmt.Sprintf("/eth/v1/node/peers")))
+	if err != nil {
+		return nil, err
+	}
+	err = json.Unmarshal(resp, &nodePeers)
+	if err != nil {
+		return nil, errors.Wrap(err, "failed to unmarshal the node peers response")
+	}
+
+	return &nodePeers, nil
+
+}
+
 // PostAttestation post an attestation to beacon api pool
 func PostAttestation(beaconEndpoint string, attestation phase0.Attestation) error {
 	additionalHeaders := make(map[string]string)
