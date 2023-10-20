@@ -6,10 +6,6 @@ import (
 	"os"
 )
 
-//func getValidAttestationData(committeeIndex uint64, client *ConsensusClient) {
-//	head := client.G
-//}
-
 func GetTestnetClientsFromConfig(filePath string) (*TestnetClientsJSON, error) {
 	data, err := os.ReadFile(filePath)
 	if err != nil {

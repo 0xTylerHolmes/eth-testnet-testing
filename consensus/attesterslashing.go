@@ -5,6 +5,11 @@ import (
 	fuzz "github.com/google/gofuzz"
 )
 
+type AttestorSlashingJSON struct {
+	Attestation1 *phase0.IndexedAttestation `json:"attestation_1"`
+	Attestation2 *phase0.IndexedAttestation `json:"attestation_2"`
+}
+
 func RandomAttesterSlashing() *phase0.AttesterSlashing {
 	var attesterSlashing phase0.AttesterSlashing
 	f := fuzz.New().NilChance(0)
