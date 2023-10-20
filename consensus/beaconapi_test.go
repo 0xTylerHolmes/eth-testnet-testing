@@ -37,6 +37,12 @@ func TestGetCheckpoint(t *testing.T) {
 	fmt.Println(checkpoint.String())
 }
 
+func TestGetNodePeers(t *testing.T) {
+	peers, err := GetNodePeers(ENDPOINT)
+	require.NoError(t, err)
+	fmt.Println(peers.String())
+}
+
 func TestPostAttestation(t *testing.T) {
 	var attestation phase0.Attestation
 	attestation = *RandomAttestation()
