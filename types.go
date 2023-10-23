@@ -1,11 +1,5 @@
 package eth_testnet_tool
 
-import (
-	"math/rand"
-	"reflect"
-	"time"
-)
-
 // ExecutionClientJSON the json representation of an execution layer client
 type ExecutionClientJSON struct {
 	Name        string `json:"name"`
@@ -43,36 +37,24 @@ type TestnetClientsJSON struct {
 
 // TestnetConfigJSON the json structure holding testnet-parameters for various utilities
 type TestnetConfigJSON struct {
+	ValidatorMnemonic        string            `json:"validator-mnemonic"`
+	GenesisValidatorCount    uint64            `json:"genesis-validator-count,omitempty"`
+	DepositContractAddress   string            `json:"deposit-contract-address,omitempty"`
+	ExecutionAccountMnemonic string            `json:"execution-account-mnemonic"`
+	ExecutionPremines        map[string]uint64 `json:"premines"`
+}
+
+// TestnetConfig contains information about the running testnet.
+type TestnetConfig struct {
 	// consensus related info
 	// ValidatorMnemonic the mnemonic used to pre-seed genesis validators and all future added validators
-	ValidatorMnemonic string `json:"validator-mnemonic"`
+	ValidatorMnemonic string
+	// GenesisValidatorCount how many validators were pre-seeded into genesis
+	GenesisValidatorCount uint64
 	// DepositContractAddress the deposit contract address, if omitted will fetch from a random client
-	DepositContractAddress string `json:"deposit-contract-address,omitempty"`
+	DepositContractAddress string
 	// ExecutionAccountMnemonic used to seed premines
-	ExecutionAccountMnemonic string `json:"execution-account-mnemonic"`
+	ExecutionAccountMnemonic string
 	// ExecutionPremines the seeded premine addresses and their values
-	ExecutionPremines map[string]uint64 `json:"premines"`
-}
-
-// GetTestnetClients creates a *TestnetClients that can be used to interact with clients in the testnet.
-func (t *TestnetClientsJSON) GetTestnetClients() *TestnetClients {
-	var testnetClients TestnetClients
-	testnetClients.ConsensusClients = make(map[string]ConsensusClient)
-	testnetClients.ExecutionClients = make(map[string]ExecutionClient)
-	for _, consensusClientJSON := range t.ConsensusClients {
-		testnetClients.ConsensusClients[consensusClientJSON.Name] = ConsensusClient{APIEndpoint: consensusClientJSON.APIEndpoint}
-	}
-	for _, executionClientJSON := range t.ExecutionClients {
-		testnetClients.ExecutionClients[executionClientJSON.Name] = ExecutionClient{RPCEndpoint: executionClientJSON.RPCEndpoint}
-	}
-	return &testnetClients
-}
-
-func (t *TestnetClients) GetRandomConsensusClient() *ConsensusClient {
-	// non-efficient but straight forward
-	rand.Seed(time.Now().UnixNano())
-	keys := reflect.ValueOf(t.ConsensusClients).MapKeys()
-	randIdx := rand.Intn(len(keys))
-	randomClient := t.ConsensusClients[keys[randIdx].String()]
-	return &randomClient
+	ExecutionPremines map[string]uint64
 }
