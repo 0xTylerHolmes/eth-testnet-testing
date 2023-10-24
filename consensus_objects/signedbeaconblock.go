@@ -1,4 +1,4 @@
-package consensus
+package consensus_objects
 
 import (
 	"fmt"
@@ -96,7 +96,7 @@ func RandomCapellaSignedBeaconBlock() *spec.VersionedSignedBeaconBlock {
 	f := fuzz.New().NilChance(0)
 	for true {
 		f.Fuzz(&signedBeaconBlock)
-		_, err := signedBeaconBlock.MarshalSSZ()
+		_, err := signedBeaconBlock.MarshalJSON()
 		if err == nil {
 			break
 		}

@@ -1,4 +1,4 @@
-package consensus
+package consensus_objects
 
 import (
 	"github.com/attestantio/go-eth2-client/spec/deneb"
