@@ -1,12 +1,13 @@
 module eth-testnet-tool
 
-go 1.19
+go 1.21
 
 // Use some special sauce
 replace github.com/attestantio/go-eth2-client => /0xtylerholmes/git/go-eth2-client
 
 require (
 	github.com/attestantio/go-eth2-client v0.18.3
+	github.com/attestantio/go-execution-client v0.8.6
 	github.com/google/gofuzz v1.2.0
 	github.com/herumi/bls-eth-go-binary v1.31.0
 	github.com/pkg/errors v0.9.1
@@ -26,6 +27,7 @@ require (
 	github.com/go-logr/stdr v1.2.2 // indirect
 	github.com/go-playground/validator/v10 v10.11.1 // indirect
 	github.com/goccy/go-yaml v1.9.2 // indirect
+	github.com/gorilla/websocket v1.5.0 // indirect
 	github.com/holiman/uint256 v1.2.2 // indirect
 	github.com/huandu/go-clone v1.6.0 // indirect
 	github.com/kilic/bls12-381 v0.1.0 // indirect
@@ -41,6 +43,7 @@ require (
 	github.com/prysmaticlabs/go-bitfield v0.0.0-20210809151128-385d8c5e3fb7 // indirect
 	github.com/r3labs/sse/v2 v2.10.0 // indirect
 	github.com/wealdtech/go-bytesutil v1.2.1 // indirect
+	github.com/ybbus/jsonrpc/v2 v2.1.7 // indirect
 	go.opentelemetry.io/otel v1.16.0 // indirect
 	go.opentelemetry.io/otel/metric v1.16.0 // indirect
 	go.opentelemetry.io/otel/trace v1.16.0 // indirect

@@ -3,6 +3,7 @@ package validator
 import (
 	"encoding/hex"
 	"fmt"
+	"github.com/attestantio/go-eth2-client/spec/phase0"
 	hbls "github.com/herumi/bls-eth-go-binary/bls"
 	"github.com/pkg/errors"
 	"github.com/tyler-smith/go-bip39"
@@ -20,6 +21,12 @@ type Validator struct {
 	ValidatorIndex uint64
 	ValidatorKey   e2types.PrivateKey
 	WithdrawalKey  e2types.PrivateKey
+	// ValidatorPublicKey contains a type friendly version of the public key for go-eth2-client
+	ValidatorPublicKey phase0.BLSPubKey
+}
+
+func (v *Validator) String() string {
+	return fmt.Sprintf("pubKey: 0x%s", hex.EncodeToString(v.ValidatorKey.PublicKey().Marshal()))
 }
 
 func MnemonicToSeed(mnemonic string) ([]byte, error) {
@@ -29,10 +36,6 @@ func MnemonicToSeed(mnemonic string) ([]byte, error) {
 	}
 	return nil, errors.New("invalid mnemonic")
 
-}
-
-func (v *Validator) String() string {
-	return fmt.Sprintf("pubKey: 0x%s", hex.EncodeToString(v.ValidatorKey.PublicKey().Marshal()))
 }
 
 func GetValidatorsFromMnemonic(mnemonic string, minAcc uint64, maxAcc uint64) ([]*Validator, error) {
@@ -54,10 +57,14 @@ func GetValidatorsFromMnemonic(mnemonic string, minAcc uint64, maxAcc uint64) ([
 		if err != nil {
 			return nil, fmt.Errorf("withdrawal %s cannot be derived, continuing to next account", valAccPath)
 		}
+		var pubKey phase0.BLSPubKey
+		copy(pubKey[:], validatorKey.PublicKey().Marshal()[:])
+
 		validators = append(validators, &Validator{
-			ValidatorIndex: idx,
-			WithdrawalKey:  withdrawalKey,
-			ValidatorKey:   validatorKey,
+			ValidatorIndex:     idx,
+			WithdrawalKey:      withdrawalKey,
+			ValidatorKey:       validatorKey,
+			ValidatorPublicKey: pubKey,
 		})
 	}
 

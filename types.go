@@ -12,23 +12,6 @@ type ConsensusClientJSON struct {
 	APIEndpoint string `json:"api-endpoint"`
 }
 
-// ConsensusClient is the api-endpoint we interact with for a CL
-type ConsensusClient struct {
-	APIEndpoint string
-}
-
-// ExecutionClient is the rpc-endpoint we interact with for an EL
-type ExecutionClient struct {
-	RPCEndpoint string
-}
-
-// TestnetClients a collection of all the consensus and execution clients
-// the map is keyed by name with the value being the client endpoint.
-type TestnetClients struct {
-	ConsensusClients map[string]ConsensusClient
-	ExecutionClients map[string]ExecutionClient
-}
-
 // TestnetClientsJSON the json representation of the TestnetClients
 type TestnetClientsJSON struct {
 	ConsensusClients []ConsensusClientJSON `json:"consensus-clients"`

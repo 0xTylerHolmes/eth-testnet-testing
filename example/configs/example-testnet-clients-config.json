@@ -1,0 +1,46 @@
+{
+    "consensus-clients": [
+        {
+            "name": "prysm-geth-0",
+            "api-endpoint": "http://10.0.20.4:5052"
+        },
+        {
+            "name": "teku-geth-0",
+            "api-endpoint": "http://10.0.20.5:5052"
+        },
+        {
+            "name": "lighthouse-geth-0",
+            "api-endpoint": "http://10.0.20.6:5052"
+        },
+        {
+            "name": "lodestar-geth-0",
+            "api-endpoint": "http://10.0.20.7:5052"
+        },
+        {
+            "name": "nimbus-geth-0",
+            "api-endpoint": "http://10.0.20.8:5052"
+        }
+    ],
+    "execution-clients": [
+        {
+            "name": "prysm-geth-0",
+            "rpc-endpoint": "http://10.0.20.4:8645"
+        },
+        {
+            "name": "teku-geth-0",
+            "rpc-endpoint": "http://10.0.20.5:8645"
+        },
+        {
+            "name": "lighthouse-geth-0",
+            "rpc-endpoint": "http://10.0.20.6:8645"
+        },
+        {
+            "name": "lodestar-geth-0",
+            "rpc-endpoint": "http://10.0.20.7:8645"
+        },
+        {
+            "name": "nimbus-geth-0",
+            "rpc-endpoint": "http://10.0.20.8:8645"
+        }
+    ]
+}

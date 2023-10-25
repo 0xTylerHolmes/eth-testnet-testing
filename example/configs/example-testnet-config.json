@@ -1,0 +1,12 @@
+{
+    "validator-mnemonic": "ocean style run case glory clip into nature guess jacket document firm fiscal hello kite disagree symptom tide net coral envelope wink render festival",
+    "genesis-validator-count": 20,
+    "deposit-contract-address": "0x8c594691c0e592ffa21f153a16ae41db5befcaaa",
+    "execution-account-mnemonic": "cat swing flag economy stadium alone churn speed unique patch report train",
+    "premines": {
+        "m/44'/60'/0'/0/0": 100000000,
+        "m/44'/60'/0'/0/1": 100000000,
+        "m/44'/60'/0'/0/2": 100000000,
+        "m/44'/60'/0'/0/3": 100000000
+    }
+}
