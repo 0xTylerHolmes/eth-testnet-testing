@@ -9,7 +9,7 @@ import (
 func RandomBlobSideCar() *deneb.BlobSidecar {
 	var blobSideCar deneb.BlobSidecar
 	f := fuzz.New().NilChance(0)
-	for true {
+	for {
 		f.Fuzz(&blobSideCar)
 		_, err := blobSideCar.MarshalSSZ()
 		if err == nil {

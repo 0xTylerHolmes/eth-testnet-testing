@@ -12,8 +12,8 @@ import (
 )
 
 func init() {
-	hbls.Init(hbls.BLS12_381)
-	hbls.SetETHmode(hbls.EthModeLatest)
+	_ = hbls.Init(hbls.BLS12_381)
+	_ = hbls.SetETHmode(hbls.EthModeLatest)
 }
 
 type Validator struct {

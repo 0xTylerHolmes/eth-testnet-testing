@@ -8,7 +8,7 @@ import (
 func RandomAggregateAndProof() *phase0.SignedAggregateAndProof {
 	var signedAggregateAndProof phase0.SignedAggregateAndProof
 	f := fuzz.New().NilChance(0)
-	for true {
+	for {
 		f.Fuzz(&signedAggregateAndProof)
 		_, err := signedAggregateAndProof.MarshalSSZ()
 		if err == nil {

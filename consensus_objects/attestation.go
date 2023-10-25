@@ -15,7 +15,7 @@ type CheckpointResponseJSON struct {
 func RandomAttestation() *phase0.Attestation {
 	var attestation phase0.Attestation
 	f := fuzz.New().NilChance(0)
-	for true {
+	for {
 		f.Fuzz(&attestation)
 		_, err := attestation.MarshalSSZ()
 		if err == nil {

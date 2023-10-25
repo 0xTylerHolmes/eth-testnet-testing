@@ -57,7 +57,7 @@ func TestClient_VerifyValidators(t *testing.T) {
 	for k, v := range onChainValidatorsIndexes.Data {
 		chainKey := v.Validator.PublicKey.String()
 		localKey := hex.EncodeToString(manager.Validators[k].ValidatorKey.PublicKey().Marshal())
-		require.Equal(t, fmt.Sprintf("%s", chainKey), fmt.Sprintf("0x%s", localKey))
+		require.Equal(t, chainKey, fmt.Sprintf("0x%s", localKey))
 	}
 }
 
@@ -108,6 +108,7 @@ func TestClientManager_CurrentTimeValues(t *testing.T) {
 	currSlot := manager.GetCurrentSlot()
 	currEpoch := manager.GetCurrentEpoch()
 	blockHeader, err := client.BeaconBlockHeader(context.Background(), &api.BeaconBlockHeaderOpts{Block: "head"})
+	require.NoError(t, err)
 	blockSlot := blockHeader.Data.Header.Message.Slot
 	require.Equal(t, currSlot, blockSlot)
 	require.Equal(t, uint64(currSlot)/slotsPerEpoch, uint64(currEpoch))

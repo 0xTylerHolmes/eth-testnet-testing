@@ -19,7 +19,7 @@ type VoluntaryExitJSON struct {
 func RandomVoluntaryExit() *phase0.VoluntaryExit {
 	var voluntaryExit phase0.VoluntaryExit
 	f := fuzz.New().NilChance(0)
-	for true {
+	for {
 		f.Fuzz(&voluntaryExit)
 		_, err := voluntaryExit.MarshalSSZ()
 		if err == nil {
@@ -33,7 +33,7 @@ func RandomVoluntaryExit() *phase0.VoluntaryExit {
 func RandomSignedVoluntaryExit() *phase0.SignedVoluntaryExit {
 	var signedVoluntaryExit phase0.SignedVoluntaryExit
 	f := fuzz.New().NilChance(0)
-	for true {
+	for {
 		f.Fuzz(&signedVoluntaryExit)
 		_, err := signedVoluntaryExit.MarshalSSZ()
 		if err == nil {

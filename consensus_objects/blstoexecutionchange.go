@@ -14,7 +14,7 @@ type SignedBLSToExecutionChangeJSON struct {
 func RandomBLSToExecutionChange() *capella.BLSToExecutionChange {
 	var blsToExecutionChange capella.BLSToExecutionChange
 	f := fuzz.New().NilChance(0)
-	for true {
+	for {
 		f.Fuzz(&blsToExecutionChange)
 		_, err := blsToExecutionChange.MarshalSSZ()
 		if err == nil {
@@ -27,7 +27,7 @@ func RandomBLSToExecutionChange() *capella.BLSToExecutionChange {
 func RandomSignedBLSToExecutionChange() *capella.SignedBLSToExecutionChange {
 	var signedBlsToExecutionChange capella.SignedBLSToExecutionChange
 	f := fuzz.New().NilChance(0)
-	for true {
+	for {
 		f.Fuzz(&signedBlsToExecutionChange)
 		_, err := signedBlsToExecutionChange.MarshalSSZ()
 		if err == nil {

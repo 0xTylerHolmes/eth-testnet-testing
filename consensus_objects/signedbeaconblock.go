@@ -43,7 +43,7 @@ type DenebSignedBeaconBlockProposalJSON struct {
 func RandomPhase0SignedBeaconBlock() *spec.VersionedSignedBeaconBlock {
 	var signedBeaconBlock phase0.SignedBeaconBlock
 	f := fuzz.New().NilChance(0)
-	for true {
+	for {
 		f.Fuzz(&signedBeaconBlock)
 		_, err := signedBeaconBlock.MarshalSSZ()
 		if err == nil {
@@ -60,7 +60,7 @@ func RandomPhase0SignedBeaconBlock() *spec.VersionedSignedBeaconBlock {
 func RandomAltairSingedBeaconBlock() *spec.VersionedSignedBeaconBlock {
 	var signedBeaconBlock altair.SignedBeaconBlock
 	f := fuzz.New().NilChance(0)
-	for true {
+	for {
 		f.Fuzz(&signedBeaconBlock)
 		_, err := signedBeaconBlock.MarshalSSZ()
 		if err == nil {
@@ -77,7 +77,7 @@ func RandomAltairSingedBeaconBlock() *spec.VersionedSignedBeaconBlock {
 func RandomBellatrixSignedBeaconBlock() *spec.VersionedSignedBeaconBlock {
 	var signedBeaconBlock bellatrix.SignedBeaconBlock
 	f := fuzz.New().NilChance(0)
-	for true {
+	for {
 		f.Fuzz(&signedBeaconBlock)
 		_, err := signedBeaconBlock.MarshalSSZ()
 		if err == nil {
@@ -94,7 +94,7 @@ func RandomBellatrixSignedBeaconBlock() *spec.VersionedSignedBeaconBlock {
 func RandomCapellaSignedBeaconBlock() *spec.VersionedSignedBeaconBlock {
 	var signedBeaconBlock capella.SignedBeaconBlock
 	f := fuzz.New().NilChance(0)
-	for true {
+	for {
 		f.Fuzz(&signedBeaconBlock)
 		_, err := signedBeaconBlock.MarshalJSON()
 		if err == nil {
@@ -111,7 +111,7 @@ func RandomCapellaSignedBeaconBlock() *spec.VersionedSignedBeaconBlock {
 func RandomDenebSignedBeaconBlock() *spec.VersionedSignedBeaconBlock {
 	var signedBeaconBlock deneb.SignedBeaconBlock
 	f := fuzz.New().NilChance(0)
-	for true {
+	for {
 		f.Fuzz(&signedBeaconBlock)
 		_, err := signedBeaconBlock.MarshalSSZ()
 		if err == nil {

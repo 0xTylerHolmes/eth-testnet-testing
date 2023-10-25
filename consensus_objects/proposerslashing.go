@@ -13,7 +13,7 @@ type ProposerSlashingJSON struct {
 func RandomProposerSlashing() *phase0.ProposerSlashing {
 	var proposerSlashing phase0.ProposerSlashing
 	f := fuzz.New().NilChance(0)
-	for true {
+	for {
 		f.Fuzz(&proposerSlashing)
 		_, err := proposerSlashing.MarshalSSZ()
 		if err == nil {

@@ -13,7 +13,7 @@ type AttestorSlashingJSON struct {
 func RandomAttesterSlashing() *phase0.AttesterSlashing {
 	var attesterSlashing phase0.AttesterSlashing
 	f := fuzz.New().NilChance(0)
-	for true {
+	for {
 		f.Fuzz(&attesterSlashing)
 		_, err := attesterSlashing.MarshalSSZ()
 		if err == nil {
